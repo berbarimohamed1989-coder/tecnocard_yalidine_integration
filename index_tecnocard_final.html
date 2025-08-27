@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TECNO CARD — متجر البطاقات NFC</title>
+<meta name="description" content="متجر تيكنو كارد — بطاقات NFC ذكية مع ربط مباشر بالواتساب. توصيل لكل الولايات والدفع عند الإستلام." />
+<meta name="theme-color" content="#0b0d12" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<meta property="og:title" content="TECNO CARD — متجر البطاقات NFC" />
+<meta property="og:description" content="بطاقات NFC ذكية مع ربط مباشر بالواتساب. توصيل لكل الولايات والدفع عند الإستلام." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ar_DZ" />
+<style>
+:root{
+  --bg:#0b0d12; --surface:#0f141c; --ink:#e6e8ee; --muted:#9aa3b2; --line:rgba(255,255,255,.08);
+  --gold:#d4af37; --gold-d:#8a6c20; --accent:#22c55e; --danger:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; font-family:'Cairo',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink); background:radial-gradient(1200px 480px at 85% -10%, rgba(212,175,55,.10), transparent 65%), var(--bg)}
+.container{width:min(1100px,96vw); margin-inline:auto; padding:20px}
+header.site{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:14px}
+.brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.3px}
+.brand .chip{display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:linear-gradient(180deg,#f6e9b2,var(--gold)); color:#161616; box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)}
+.header-cta{display:flex; gap:8px; flex-wrap:wrap}
+.hbtn{display:inline-flex; align-items:center; gap:.45rem; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:#0d1219; color:var(--ink); text-decoration:none; font-weight:800}
+.hbtn.whatsapp{background:linear-gradient(180deg,#34d399,#10b981); color:#061b10; border:0}
+.hbtn:hover{filter:saturate(1.05)}
+.hero{margin:10px 0 18px; padding:22px; background:linear-gradient(180deg,#0d1219,#0a0f15); border:1px solid var(--line); border-radius:18px}
+.hero h1{margin:0 0 6px; font-size:clamp(22px,4vw,30px)}
+.hero p{margin:0; color:var(--muted)}
+.grid{display:grid; gap:22px}
+@media (min-width:960px){ .grid{grid-template-columns:1.1fr .9fr} }
+.card{background:linear-gradient(180deg,#0d1219,#0a0f15); border:1px solid var(--line); border-radius:18px; box-shadow:0 18px 70px rgba(0,0,0,.45)}
+.pad{padding:18px}
+/* Gallery */
+.gallery .main{border-radius:14px; overflow:hidden; border:1px solid var(--line)}
+.gallery .main img{display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover}
+.thumbs{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px}
+.thumb{border:1px solid var(--line); border-radius:10px; overflow:hidden; cursor:pointer}
+.thumb img{width:100%; height:70px; object-fit:cover; display:block}
+.thumb.active{outline:2px solid var(--gold)}
+/* Product */
+.section-title{margin:0 0 8px; font-size:1.1rem; color:var(--muted)}
+.price{display:flex; gap:12px; align-items:center; margin:6px 0 12px}
+.price .now{font-weight:900; font-size:1.6rem}
+.price .was{color:var(--muted); text-decoration:line-through}
+.badge{-webkit-font-smoothing:antialiased; display:inline-flex; align-items:center; gap:.4rem; font-weight:800; color:#161616; background:linear-gradient(180deg,#f6e9b2,var(--gold)); padding:.28rem .6rem; border-radius:999px; font-size:.9rem; box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)}
+.variants{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0}
+.vbtn{border:1px solid var(--line); background:#0d1016; color:var(--ink); padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:800}
+.vbtn.active{border-color:rgba(212,175,55,.7); color:var(--gold)}
+.row{display:grid; gap:12px; grid-template-columns:1fr 1fr}
+.field{display:grid; gap:6px}
+label{font-size:.95rem; color:var(--muted)}
+input,select,textarea{background:#0f131a; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:12px}
+input:focus,select:focus,textarea:focus{outline:none; border-color:rgba(212,175,55,.6)}
+.qty{display:inline-flex; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.qty button{all:unset; display:grid; place-items:center; width:42px; background:#0d1016; cursor:pointer}
+.qty input{width:64px; text-align:center; border:0; background:#0d1016}
+.buy{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:.55rem; padding:12px 16px; border-radius:12px; border:1px solid var(--line); background:#0c0f14; color:var(--ink); text-decoration:none; cursor:pointer; font-weight:900}
+.btn.primary{background:linear-gradient(180deg,#34d399,#10b981); color:#041b10; border:0}
+.btn.primary:hover{filter:saturate(1.05)}
+.summary{margin-top:12px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.summary h3{margin:0; padding:12px 14px; border-bottom:1px solid var(--line); background:#0d1118; font-size:1rem}
+.summary .rowx{display:flex; justify-content:space-between; padding:10px 14px; border-top:1px dashed var(--line)}
+.summary .rowx.total{font-weight:900}
+.footer{color:var(--muted); text-align:center; padding:18px 0; font-size:.95rem}
+.toast{position:fixed; inset-inline:50%; bottom:22px; translate:-50% 0; background:#11161e; color:var(--ink); border:1px solid var(--line); padding:10px 14px; border-radius:10px; font-size:.95rem; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; transform:translate(-50%,10px); box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+/* زر الإدارة مخفي */
+#adminBar{display:none; gap:8px; margin-block:10px}
+#adminBar .btn{background:#121826}
+#adminHint{color:var(--muted); font-size:.9rem; margin-top:6px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header class="site" aria-label="رأس الصفحة">
+      <div class="brand" aria-label="الشعار"><span class="chip" aria-hidden="true"><i class="fa-solid fa-microchip"></i></span> TECNO CARD</div>
+      <div class="header-cta">
+        <a class="hbtn whatsapp" id="waHeader" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> تواصل واتساب</a>
+        <a class="hbtn" href="tel:+213770984554"><i class="fa-solid fa-phone"></i> إتصال</a>
+      </div>
+    </header>
+
+    <!-- شريط إدارة مخفي (لصاحب المتجر فقط) -->
+    <div id="adminBar" role="region" aria-label="شريط الإدارة">
+      <button class="btn" id="exportBtn" type="button"><i class="fa-solid fa-file-export"></i> تصدير الطلبات (CSV)</button>
+      <button class="btn" id="clearBtn" type="button"><i class="fa-regular fa-trash-can"></i> مسح الطلبات</button>
+      <span id="adminHint">الطلبات تُحفظ محلياً على هذا الجهاز فقط.</span>
+    </div>
+
+    <section class="hero" aria-label="تعريف المنتج">
+      <h1>بطاقة NFC ذكية — لمسة وحدة تكفي!</h1>
+      <p>معلوماتك تتبدل في ثانية: رقمك، واتساب، فيسبوك، إيميل… تصميم احترافي + ربط مباشر.</p>
+    </section>
+
+    <main class="grid">
+      <!-- معرض صور -->
+      <section class="card pad" aria-label="معرض المنتج">
+        <div class="gallery">
+          <div class="main"><img id="mainImg" src="" alt="Tecno Card NFC" loading="eager" width="800" height="600"></div>
+          <div class="thumbs" id="thumbs" role="list"></div>
+        </div>
+      </section>
+
+      <!-- الطلب عبر واتساب -->
+      <section class="card pad" aria-label="الطلب">
+        <span class="badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> تخفيض -16% اليوم</span>
+        <h2 class="section-title" style="margin-top:10px">إختر الخيار</h2>
+        <div class="price"><span class="now" id="pNow">— DA</span><span class="was" id="pWas">السعر القديم — DA</span></div>
+
+        <div class="variants" id="variants" role="listbox" aria-label="خيارات المنتج"></div>
+
+        <form id="waForm" onsubmit="return false" autocomplete="on">
+          <div class="row">
+            <div class="field">
+              <label for="fname">الإسم الكامل</label>
+              <input id="fname" placeholder="الإسم واللقب" required />
+            </div>
+            <div class="field">
+              <label for="phone">رقم الهاتف</label>
+              <input id="phone" inputmode="tel" placeholder="مثال: 0770 00 00 00" pattern="^0[5-7][0-9]{8}$" title="أدخل رقم جزائري صحيح يبدأ بـ 05/06/07" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="wilaya">الولاية</label>
+              <select id="wilaya" required>
+                <option value="">إختر الولاية</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>الكمية</label>
+              <div class="qty" aria-label="الكمية">
+                <button type="button" id="minus" aria-label="نقص">−</button>
+                <input id="qty" value="1" inputmode="numeric" pattern="[0-9]*" aria-live="polite" />
+                <button type="button" id="plus" aria-label="زد">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- صف البلدية + شركة الشحن (مخفية) -->
+          <div class="row">
+            <div class="field">
+              <label for="commune">البلدية</label>
+              <input id="commune" placeholder="مثال" />
+            </div>
+            <div class="field" style="display:none">
+              <label for="shipCo">شركة الشحن</label>
+              <select id="shipCo">
+                <option value="yalidine" selected>Yalidine</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="note">ملاحظة (إسم على البطاقة/اللون…)</label>
+            <textarea id="note" rows="3" placeholder="مثال: أريدها بالأسود والذهبي مع إسمي بالعربية"></textarea>
+          </div>
+
+          <div class="buy">
+            <a class="btn primary" id="waBtn" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> اطلب عبر واتساب</a>
+            <button class="btn" type="button" id="copyLink"><i class="fa-regular fa-copy"></i> نسخ رابط الصفحة</button>
+          </div>
+
+          <section class="summary" aria-label="ملخص الطلب">
+            <h3>الملخص</h3>
+            <div class="rowx"><span><span id="sQty">1</span> × <span id="sVar">—</span></span><span id="sCard">— DA</span></div>
+            <div class="rowx"><span>الشحن</span><span id="sShip">— DA</span></div>
+            <div class="rowx"><span>شركة الشحن</span><span>Yalidine</span></div>
+            <div class="rowx total"><span>الإجمالي</span><span id="sTotal">— DA</span></div>
+          </section>
+        </form>
+      </section>
+    </main>
+
+    <div class="footer">© <span id="year">2025</span> TECNO CARD — توصيل لكل الولايات • الدفع عند الإستلام</div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">تم النسخ ✅</div>
+
+<script type="application/json" id="storeData">
+{
+  "brand": "TECNO CARD",
+  "owner_phone_display": "0542322792",
+  "owner_phone_e164": "+213542322792",
+  "whatsapp_intl": "213542322792",
+  "images": [
+    "https://i.postimg.cc/MTK1f5hG/NFC.jpg",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop",
+    "https://i.postimg.cc/13QB5G58/NFC2.jpg",
+    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop"
+  ],
+  "variants": [
+    {"id":"STD","name":"Standard","price":2200, "discount":300, "final":1900},
+    {"id":"CUST","name":"Personalise AVEC LOGO","price":4000, "discount":500, "final":3500}
+  ],
+  "wilayas": [
+    {"id":1,"name":"01 - Adrar","ship":1000}, {"id":2,"name":"02 - Chlef","ship":600}, {"id":3,"name":"03 - Laghouat","ship":700},
+    {"id":4,"name":"04 - Oum El Bouaghi","ship":500}, {"id":5,"name":"05 - Batna","ship":500}, {"id":6,"name":"06 - Béjaïa","ship":500},
+    {"id":7,"name":"07 - Biskra","ship":600}, {"id":8,"name":"08 - Béchar","ship":600}, {"id":9,"name":"09 - Blida","ship":600},
+    {"id":10,"name":"10 - Bouira","ship":600}, {"id":11,"name":"11 - Tamanrasset","ship":1500}, {"id":12,"name":"12 - Tébessa","ship":600},
+    {"id":13,"name":"13 - Tlemcen","ship":600}, {"id":14,"name":"14 - Tiaret","ship":600}, {"id":15,"name":"15 - Tizi Ouzou","ship":600},
+    {"id":16,"name":"16 - Alger","ship":500}, {"id":17,"name":"17 - Djelfa","ship":700}, {"id":18,"name":"18 - Jijel","ship":500},
+    {"id":19,"name":"19 - Sétif","ship":500}, {"id":20,"name":"20 - Saïda","ship":600}, {"id":21,"name":"21 - Skikda","ship":500},
+    {"id":22,"name":"22 - Sidi Bel Abbès","ship":500}, {"id":23,"name":"23 - Annaba","ship":600}, {"id":24,"name":"24 - Guelma","ship":500},
+    {"id":25,"name":"25 - Constantine","ship":200}, {"id":26,"name":"26 - Médéa","ship":600}, {"id":27,"name":"27 - Mostaganem","ship":500},
+    {"id":28,"name":"28 - M'Sila","ship":600}, {"id":29,"name":"29 - Mascara","ship":500}, {"id":30,"name":"30 - Ouargla","ship":500},
+    {"id":31,"name":"31 - Oran","ship":500}, {"id":32,"name":"32 - El Bayadh","ship":600}, {"id":33,"name":"33 - Illizi","ship":2000},
+    {"id":34,"name":"34 - Bordj Bou Arreridj","ship":500}, {"id":35,"name":"35 - Boumerdès","ship":500}, {"id":36,"name":"36 - El Tarf","ship":500},
+    {"id":37,"name":"37 - Tindouf","ship":1900}, {"id":38,"name":"38 - Tissemsilt","ship":500}, {"id":39,"name":"39 - El Oued","ship":600},
+    {"id":40,"name":"40 - Khenchela","ship":500}, {"id":41,"name":"41 - Souk Ahras","ship":500}, {"id":42,"name":"42 - Tipaza","ship":600},
+    {"id":43,"name":"43 - Mila","ship":500}, {"id":44,"name":"44 - Aïn Defla","ship":600}, {"id":45,"name":"45 - Naâma","ship":600},
+    {"id":46,"name":"46 - Aïn Témouchent","ship":600}, {"id":47,"name":"47 - Ghardaïa","ship":500}, {"id":48,"name":"48 - Relizane","ship":600},
+    {"id":49,"name":"49 - Timimoun","ship":1000}, {"id":50,"name":"50 - Bordj Badji Mokhtar","ship":1400}, {"id":51,"name":"51 - Ouled Djellal","ship":500},
+    {"id":52,"name":"52 - Béni Abbès","ship":700}, {"id":53,"name":"53 - In Salah","ship":1400}, {"id":54,"name":"54 - In Guezzam","ship":1400},
+    {"id":55,"name":"55 - Touggourt","ship":700}, {"id":56,"name":"56 - Djanet","ship":1400}, {"id":57,"name":"57 - El Meghaier","ship":600},
+    {"id":58,"name":"58 - El Menia","ship":600}
+  ]
+}
+</script>
+<script>
+(() => {
+  // مساعدات مختصرة
+  const $  = (s,p=document)=>p.querySelector(s);
+  const $$ = (s,p=document)=>[...p.querySelectorAll(s)];
+  const fmt = (n)=> new Intl.NumberFormat('fr-DZ').format(Number(n)||0);
+
+  // بيانات المتجر
+  const data = JSON.parse($('#storeData').textContent);
+  $('#year').textContent = new Date().getFullYear();
+
+  // روابط الرأس
+  const waHeader = $('#waHeader');
+  waHeader.href = `https://wa.me/${data.whatsapp_intl}`;
+
+  /* ===================== المعرض ===================== */
+  const thumbs = $('#thumbs');
+  const mainImg = $('#mainImg');
+  thumbs.innerHTML = '';
+  data.images.forEach((src,i)=>{
+    const b = document.createElement('button');
+    b.type='button'; b.className='thumb'+(i===0?' active':''); b.setAttribute('role','listitem'); b.setAttribute('aria-label',`صورة ${i+1}`);
+    b.innerHTML = `<img src="${src}" alt="صورة ${i+1} للمنتج" loading="lazy">`;
+    b.addEventListener('click',()=>{
+      $$('.thumb').forEach(x=>x.classList.remove('active')); b.classList.add('active'); mainImg.src=src;
+    });
+    thumbs.appendChild(b);
+  });
+  if (data.images[0]) mainImg.src = data.images[0];
+
+  /* ===================== المتغيرات والأسعار ===================== */
+  // نجعلها على window ليستعملها سكربت الإدارة أيضاً
+  window.selected = data.variants?.[1] || data.variants?.[0]; // الافتراضي: مخصصة إن وجدت
+
+  const variantsWrap = $('#variants');
+  const pNow = $('#pNow'); const pWas = $('#pWas');
+  const sVar = $('#sVar'); const sCard = $('#sCard'); const sTotal = $('#sTotal'); const sShip = $('#sShip');
+  const qty = $('#qty'); const qtyMinus=$('#minus'); const qtyPlus=$('#plus'); const wilaya = $('#wilaya');
+
+  function renderVariants(){
+    variantsWrap.innerHTML='';
+    (data.variants||[]).forEach(v=>{
+      const el = document.createElement('button');
+      el.type='button'; el.className='vbtn'+(v.id===window.selected.id?' active':''); el.textContent=v.name; el.setAttribute('aria-pressed', v.id===window.selected.id);
+      el.addEventListener('click',()=>{window.selected=v; updatePrices(); renderVariants();});
+      variantsWrap.appendChild(el);
+    });
+    sVar.textContent = window.selected?.name || '—';
+  }
+  function updatePrices(){
+    if(!window.selected){ pNow.textContent='— DA'; pWas.textContent='— DA'; return; }
+    pNow.textContent = fmt(window.selected.final)+' DA';
+    pWas.textContent = 'السعر القديم '+fmt(window.selected.price)+' DA';
+    updateSummary();
+  }
+
+  // Wilayas
+  (data.wilayas||[]).forEach(w=>{ const o=new Option(w.name,w.id); o.dataset.ship=w.ship; wilaya.add(o); });
+  function currentShip(){ const opt = wilaya.options[wilaya.selectedIndex]; return Number(opt?.dataset.ship||0); }
+
+  function setQty(v){ const n=Math.max(1,parseInt(v||'1',10)||1); qty.value=n; updateSummary(); }
+  qtyMinus.addEventListener('click',()=>setQty(+qty.value-1));
+  qtyPlus.addEventListener('click',()=>setQty(+qty.value+1));
+  qty.addEventListener('input',()=>setQty(qty.value));
+  wilaya.addEventListener('change',updateSummary);
+
+  function updateSummary(){
+    const q=Math.max(1,parseInt(qty.value,10)||1);
+    const card = (window.selected?.final||0)*q; const ship=currentShip();
+    $('#sQty').textContent = q; sCard.textContent = fmt(card)+' DA'; sShip.textContent = ship? fmt(ship)+' DA':'— DA'; sTotal.textContent = fmt(card+ship)+' DA';
+  }
+
+  renderVariants(); updatePrices(); setQty(1);
+
+  /* ===================== واتساب + تحقق فورم ===================== */
+  function buildMessage(){
+    const name = $('#fname').value.trim();
+    const phone = $('#phone').value.trim();
+    const wTxt = wilaya.value ? wilaya.options[wilaya.selectedIndex].text : '';
+    const commune = $('#commune')?.value.trim();
+    const shipCo = ($('#shipCo')?.value === 'yalidine') ? 'Yalidine' : 'Other';
+
+    const q = Math.max(1,parseInt(qty.value,10)||1);
+    const card = (window.selected?.final||0)*q; const ship=currentShip();
+    const note = $('#note').value.trim();
+
+    const lines = [
+      `👋 طلب جديد من متجر ${data.brand}`,
+      `• المنتج: بطاقة NFC — ${window.selected?.name||''}`,
+      `• الكمية: ${q}`,
+      `• المجموع: ${fmt(card)} DA`,
+      ship? `• الشحن (${wTxt}): ${fmt(ship)} DA` : `• الشحن: لم يتم تحديد الولاية`,
+      `• الإجمالي: ${fmt(card+ship)} DA`,
+      name? `• الإسم: ${name}`:'',
+      phone? `• هاتف: ${phone}`:'',
+      wTxt? `• الولاية: ${wTxt}`:'',
+      commune? `• البلدية: ${commune}`:'',
+      `• الشحن عبر: ${shipCo}`,
+      note? `• ملاحظة: ${note}`:''
+    ].filter(Boolean).join('\n');
+    return encodeURIComponent(lines);
+  }
+
+  const waBtn = $('#waBtn');
+  function updateWaHref(){ waBtn.href = `https://wa.me/${data.whatsapp_intl}?text=${buildMessage()}`; }
+  ['input','change'].forEach(ev=> $('#waForm').addEventListener(ev, updateWaHref));
+  updateWaHref();
+
+  // تفعيل/تعطيل زر واتساب حسب صحة الحقول الأساسية
+  function validateForm(){
+    const ok = $('#fname').value.trim().length>2 && /^0[5-7][0-9]{8}$/.test($('#phone').value.trim()) && !!wilaya.value;
+    waBtn.setAttribute('aria-disabled', ok? 'false':'true');
+    waBtn.style.opacity = ok? '1':'0.6';
+    waBtn.style.pointerEvents = ok? 'auto':'none';
+  }
+  ['input','change'].forEach(ev=> $('#waForm').addEventListener(ev, validateForm));
+  validateForm();
+
+  /* ===================== نسخ الرابط ===================== */
+  const toast = $('#toast');
+  $('#copyLink').addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(location.href); toast.textContent='تم نسخ الرابط ✅'; }
+    catch{ toast.textContent='تعذر النسخ'; }
+    toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1800);
+  });
+
+  /* ===================== حفظ الطلبية محلياً ===================== */
+  const KEY='tecno_card_orders';
+  const loadOrders = () => { try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return[]} };
+  const saveOrders = (arr) => localStorage.setItem(KEY, JSON.stringify(arr));
+  window.loadOrders = loadOrders; // متاح للإدارة
+
+  function num(t){ const m=(''+(t??'')).replace(/[^\d.\-]/g,''); return Number(m)||0; }
+  function buildOrderFromDOM(){
+    const qEl = $('#qty');
+    const q   = qEl ? Math.max(1, parseInt(qEl.value||'1',10)||1) : num($('#sQty')?.textContent||1);
+
+    const priceUnit = (window.selected?.final) ?? num($('#pNow')?.textContent);
+    const subTotal  = priceUnit * q;
+    const shipVal   = num($('#sShip')?.textContent||'');
+    const totalVal  = subTotal + shipVal;
+
+    const wilSel = $('#wilaya');
+    const wilaya_code = wilSel?.value || '';
+    const wilaya_name = wilSel?.options?.[wilSel.selectedIndex]?.text || '';
+    const communeVal  = $('#commune')?.value || '';
+
+    const variantName = (window.selected?.name) || $('#sVar')?.textContent || 'بطاقة NFC';
+
+    return {
+      timestamp: new Date().toISOString(),
+      variant_id: window.selected?.id || '',
+      variant_name: variantName,
+      quantity: q,
+      price_unit: priceUnit,
+      price_subtotal: subTotal,
+      shipping_company: ($('#shipCo')?.value==='yalidine') ? 'Yalidine' : ($('#shipCo')? 'Other' : ''),
+      shipping_price: shipVal,
+      total: totalVal,
+      name: $('#fname')?.value?.trim() || '',
+      phone: $('#phone')?.value?.trim() || '',
+      wilaya_code,
+      wilaya_name,
+      commune: communeVal,
+      note: $('#note')?.value?.trim() || ''
+    };
+  }
+
+  /* ===================== إرسال للسيرفر قبل فتح واتساب ===================== */
+  async function sendToServerBeforeWhatsApp(){
+    const q = Math.max(1, parseInt($('#qty').value || '1', 10) || 1);
+    const priceUnit = (window.selected?.final) || 0;
+    const subTotal = priceUnit * q;
+
+    const opt = $('#wilaya').options[$('#wilaya').selectedIndex];
+    const ship = Number(opt?.dataset.ship || 0);
+    const total = subTotal + ship;
+
+    const payload = {
+      name: $('#fname').value.trim(),
+      phone: $('#phone').value.trim(),
+      wilaya: $('#wilaya').value,
+      commune: $('#commune').value.trim(),
+      variant: window.selected?.name || 'Carte NFC',
+      quantity: q,
+      note: $('#note').value.trim(),
+      price_total: total,      // COD
+      declared_value: total    // لضمان حساب COD على الأكبر
+    };
+
+    try{
+      const res = await fetch('/api/create_parcel.php', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const out = await res.json();
+      if(out.ok){
+        toast.textContent = 'تم إنشاء الشحنة ✅ ' + (out.tracking ? ('['+out.tracking+']') : '');
+      }else{
+        toast.textContent = 'تعذّر إنشاء الشحنة، سيُرسل عبر واتساب فقط';
+        console.warn('Yalidine API error', out);
+      }
+    }catch(e){
+      toast.textContent = 'مشكلة اتصال بالسيرفر';
+      console.error(e);
+    }
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2200);
+  }
+
+  // عند الضغط على واتساب: أرسل للسيرفر ثم خزّن محليًا، ثم افتح واتساب طبيعي
+  const waBtnEl = waBtn; // مرجع
+  if (waBtnEl){
+    waBtnEl.addEventListener('click', async () => {
+      await sendToServerBeforeWhatsApp();
+
+      // حفظ محلي
+      const arr = loadOrders();
+      arr.push(buildOrderFromDOM());
+      saveOrders(arr);
+      // لا نمنع السلوك الافتراضي: سيفتح رابط واتساب
+    }, {capture:true});
+  }
+
+  /* ===================== شريط الإدارة (مخفي) ===================== */
+  const adminBar = $('#adminBar');
+  const exportBtn = $('#exportBtn');
+  const clearBtn = $('#clearBtn');
+
+  function revealAdminBar(){ adminBar.style.display='flex'; }
+
+  // 1) عبر معامل ?admin=1 في الرابط
+  const url = new URL(location.href);
+  if(url.searchParams.get('admin')==='1'){ revealAdminBar(); }
+
+  // 2) اختصار لوحة المفاتيح: Ctrl + Shift + X
+  document.addEventListener('keydown', (e)=>{
+    if(e.ctrlKey && e.shiftKey && (e.key==='x' || e.key==='X')){ revealAdminBar(); }
+  });
+
+  // تصدير CSV
+  function toCSV(rows){
+    const headers = Object.keys(rows[0]||{
+      timestamp:'',variant_id:'',variant_name:'',quantity:'',price_unit:'',price_subtotal:'',shipping_company:'',shipping_price:'',total:'',name:'',phone:'',wilaya_code:'',wilaya_name:'',commune:'',note:''
+    });
+    const esc = (v)=>`"${String(v??'').replace(/"/g,'""')}"`;
+    const lines = [headers.join(',')].concat(rows.map(r=>headers.map(h=>esc(r[h])).join(',')));
+    return '\\ufeff'+lines.join('\\n'); // BOM ليدعم Excel
+  }
+
+  exportBtn?.addEventListener('click',()=>{
+    const rows = loadOrders();
+    if(!rows.length){ toast.textContent='لا توجد طلبيات بعد'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1500); return; }
+    const csv = toCSV(rows);
+    const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    const a = document.createElement('a');
+    const d = new Date();
+    const y = d.getFullYear(); const m = String(d.getMonth()+1).padStart(2,'0'); const dd = String(d.getDate()).padStart(2,'0');
+    a.href = URL.createObjectURL(blob);
+    a.download = `orders_${y}-${m}-${dd}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  clearBtn?.addEventListener('click',()=>{
+    if(confirm('هل تريد مسح جميع الطلبيات المخزنة على هذا الجهاز؟')){
+      localStorage.removeItem(KEY);
+      toast.textContent='تم المسح'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1200);
+    }
+  });
+})();
+</script>
+
+<!-- بيانات مُهيكلة لتحسين السيو -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "بطاقة NFC",
+  "brand": {"@type":"Brand","name":"TECNO CARD"},
+  "description": "بطاقة NFC ذكية مع ربط مباشر بالواتساب، توصيل لكل الولايات والدفع عند الإستلام.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "DZD",
+    "price": "2800",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+</body>
+</html>
